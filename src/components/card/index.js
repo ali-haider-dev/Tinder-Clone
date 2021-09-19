@@ -9,16 +9,17 @@ function Card() {
     const [people, setPeople] = useState([])
 
     useEffect(() => {
-        db.collection('people').onSnapshot(snapshot => {
+        const unSubscribe = db.collection('people').onSnapshot(snapshot => {
             setPeople(snapshot.docs.map(doc => doc.data()))
         })
+        return () => (
+            unSubscribe()
+        )
     }, [])
 
     return (
         <div>
-            <h1>Tinder Cards</h1>
-            <div className="tindercards__catdContainer">
-
+            <div className="tindercards__cardContainer">
                 {
                     people.map((person) => (
                         <TinderCard

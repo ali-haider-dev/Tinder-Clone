@@ -1,12 +1,17 @@
 import './App.css';
 import Header from './components/header';
 import Card from './components/card';
+import SwipeButtons from './components/SwipeButtons';
+
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import Chats from './components/chats';
+import ChatScreen from "./components/chats/chatScreen"
 
 function App() {
   return (
@@ -17,17 +22,24 @@ function App() {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/about">
 
+            <Route path="/chat/:person">
+              <Header backButton="/chat" />
+              <ChatScreen />
             </Route>
             <Route path="/chat">
-              <h1>i am chat page</h1>
+
+              <Header backButton="/" />
+              <Chats />
 
             </Route>
             <Route path="/">
               {/* Header */}
               <Header />
+
               <Card />
+              <SwipeButtons />
+
             </Route>
           </Switch>
         </div>
